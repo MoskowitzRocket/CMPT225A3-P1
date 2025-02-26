@@ -1,4 +1,4 @@
-
+# CMPT225 Assignment Three: Part A
 # Introduction
 
 The main operations of a priority queue are insert( O, P  ), which inserts object O with priority P, and deleteMin() which deletes and returns the object of highest priority.   In typical uses, these objects would be tasks, processes, or customers, for example.  In class we described using a heap to implement a priority queue, but in our heap descriptions we only considered the priority values, not the objects associated with them.   If we only need the operations insert and deleteMin, then it is easy to modify the design from lecture to address this.   We simply change the array so that instead of storing priority values it stores pairs consisting of an object and its associated priority.  (And of course modify some functions to pass the objects as arguments or return values.)   This is similar to the way we modified the HashTable class, which stores a set, to make a HMap class, which stores key-value pairs, in assignment 2, by modifying the hash table array elements.
