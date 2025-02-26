@@ -11,31 +11,75 @@ class IndPQ
 {
 
 public:
-    IndPQ();                                               // —-> constructor creating an empty IndPQ.
-    void insert(const std::string &taskid, int p);         // --> Insert taskid with priority p.
-    std::string &deleteMin();                              //  --> Remove and return (a reference to) a task ID with smallest priority.
-    std::string &getMin();                                 //  --> Return (a reference to) a task ID with the smallest priority.
-    void updatePriority(const std::string &taskid, int p); //  --> change the priority for taskid to p.
-    void remove(const std::string &tid);                   // --> remove taskid from the PQ
-    bool isEmpty();                                        // --> Return true if the PQ is empty, otherwise false.
-    int size();                                            //  --> Return the number of tasks in the PQ.
-    void clear();                                          //  --> Remove all tasks from the PQ.
-    void display();                                        // —-> prints out the queue contents.
-    void ddisplay();                                       // —-> prints out a representation of the data structures.
+    // —-> constructor creating an empty IndPQ.
+    IndPQ() : heap(), hmap() {}
+
+    // --> Insert taskid with priority p.
+    void insert(const std::string &taskid, int p)
+    {
+
+        heap.insert({p, const_cast<string &>(taskid)});
+        hmap.insert(taskid, p);
+    }
+
+    //  --> Remove and return (a reference to) a task ID with smallest priority.
+    std::string &deleteMin(){
+      HeapNode minNode;
+    
+      heap.deleteMin();
+      //hmap.remove(minNode.taskid);
+      
+       
+      return minNode.taskid;
+
+    }
+
+    //  --> Return (a reference to) a task ID with the smallest priority.
+    std::string &getMin();
+
+    //  --> change the priority for taskid to p.
+    void updatePriority(const std::string &taskid, int p);
+
+    // --> remove taskid from the PQ
+    void remove(const std::string &tid);
+
+    // --> Return true if the PQ is empty, otherwise false.
+    bool isEmpty();
+
+    //  --> Return the number of tasks in the PQ.
+    int size();
+
+    //  --> Remove all tasks from the PQ.
+    void clear();
+
+    // —-> prints out the queue contents.
+    void display();
+
+    // —-> prints out a representation of the data structures.
+    void ddisplay()
+    {
+        heap.ddisplay();
+        hmap.ddisplay();
+    }
+
 private:
     struct HeapNode
     {
-        unsigned int priority;
+        int priority;
         string taskid;
         HeapNode() : priority(0), taskid("") {} // Default constructor
-        HeapNode(unsigned int p, string &id) : priority(p), taskid(id) {}
+        HeapNode(int p, string &id) : priority(p), taskid(id) {}
     };
 
     class Heap
     {
 
     public:
-        // explicit Heap(int capacity = 100);
+        explicit Heap(int capacity = 10) : array(capacity), currentSize{0}
+        {
+
+            buildHeap();
+        }
         explicit Heap(const vector<HeapNode> &items) : array(items.size() + 10), currentSize{items.size()}
         {
             for (int i{0}; i < items.size(); ++i)
@@ -156,7 +200,7 @@ private:
         }
     };
 
-    //template<typename string, typename int>
+    // template<typename string, typename int>
     class HMap
     {
     public:
@@ -256,21 +300,22 @@ private:
             cout << endl;
         }
 
-        void ddisplay() {
-            for (size_t i = 0; i < array.size(); ++i) {
+        void ddisplay()
+        {
+            for (size_t i = 0; i < array.size(); ++i)
+            {
                 cout << "Index " << i << ": ";
-                
-                if (array[i].info == EMPTY) 
+
+                if (array[i].info == EMPTY)
                     cout << "EMPTY\t-\t-";
-                else if (array[i].info == DELETED) 
+                else if (array[i].info == DELETED)
                     cout << "DELETED\t" << array[i].key << "\t" << array[i].value;
-                else 
+                else
                     cout << "ACTIVE\t" << array[i].key << "\t" << array[i].value;
-        
+
                 cout << endl;
             }
         }
-        
 
     private:
         struct HashEntry

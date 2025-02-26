@@ -1,5 +1,4 @@
 ./TestIndPQ
-Heap (Array Representation): 
 Debug Display. CurrentSize: 0
 Index 0: [0, ] 
 Index 1: [0, ] 
@@ -11,181 +10,98 @@ Index 6: [0, ]
 Index 7: [0, ] 
 Index 8: [0, ] 
 Index 9: [0, ] 
-Heap (Array Representation): [6, Task A] 
+Index 0: EMPTY	-	-
+Index 1: EMPTY	-	-
+Index 2: EMPTY	-	-
+Index 3: EMPTY	-	-
+Index 4: EMPTY	-	-
+Index 5: EMPTY	-	-
+Index 6: EMPTY	-	-
+Index 7: EMPTY	-	-
+Index 8: EMPTY	-	-
+Index 9: EMPTY	-	-
+Index 10: EMPTY	-	-
 
-Debug Display. CurrentSize: 1
-Index 0: [6, ] 
-Index 1: [6, Task A] 
-Index 2: [0, ] 
-Index 3: [0, ] 
-Index 4: [0, ] 
-Index 5: [0, ] 
+
+
+BBBBBDebug Display. CurrentSize: 5
+Index 0: [1, ] 
+Index 1: [1, Task E] 
+Index 2: [2, Task B] 
+Index 3: [3, Task C] 
+Index 4: [8, Task A] 
+Index 5: [6, Task D] 
 Index 6: [0, ] 
 Index 7: [0, ] 
 Index 8: [0, ] 
 Index 9: [0, ] 
-Heap (Array Representation): [3, Task B] 
-[6, Task A] 
-
-Debug Display. CurrentSize: 2
-Index 0: [3, ] 
-Index 1: [3, Task B] 
-Index 2: [6, Task A] 
-Index 3: [0, ] 
-Index 4: [0, ] 
-Index 5: [0, ] 
-Index 6: [0, ] 
-Index 7: [0, ] 
-Index 8: [0, ] 
-Index 9: [0, ] 
-Heap (Array Representation): [2, Task C] 
-[6, Task A] 
-[3, Task B] 
-
-Debug Display. CurrentSize: 3
-Index 0: [2, ] 
-Index 1: [2, Task C] 
-Index 2: [6, Task A] 
-Index 3: [3, Task B] 
-Index 4: [0, ] 
-Index 5: [0, ] 
-Index 6: [0, ] 
-Index 7: [0, ] 
-Index 8: [0, ] 
-Index 9: [0, ] 
-Heap (Array Representation): [2, Task C] 
-[5, Task D] 
-[3, Task B] 
-[6, Task A] 
-
+Index 0: ACTIVE	Task A	8
+Index 1: EMPTY	-	-
+Index 2: ACTIVE	Task E	1
+Index 3: EMPTY	-	-
+Index 4: EMPTY	-	-
+Index 5: ACTIVE	Task B	2
+Index 6: ACTIVE	Task D	6
+Index 7: ACTIVE	Task C	3
+Index 8: EMPTY	-	-
+Index 9: EMPTY	-	-
+Index 10: EMPTY	-	-
 Debug Display. CurrentSize: 4
-Index 0: [5, ] 
-Index 1: [2, Task C] 
-Index 2: [5, Task D] 
-Index 3: [3, Task B] 
-Index 4: [6, Task A] 
-Index 5: [0, ] 
-Index 6: [0, ] 
-Index 7: [0, ] 
-Index 8: [0, ] 
-Index 9: [0, ] 
-Heap (Array Representation): [1, Task E] 
-[2, Task C] 
-[3, Task B] 
-[6, Task A] 
-[5, Task D] 
-
-Debug Display. CurrentSize: 5
 Index 0: [1, ] 
-Index 1: [1, Task E] 
-Index 2: [2, Task C] 
-Index 3: [3, Task B] 
-Index 4: [6, Task A] 
-Index 5: [5, Task D] 
+Index 1: [6, Task D] 
+Index 2: [2, Task B] 
+Index 3: [3, Task C] 
+Index 4: [8, Task A] 
+Index 5: [6, ] 
 Index 6: [0, ] 
 Index 7: [0, ] 
 Index 8: [0, ] 
 Index 9: [0, ] 
-Heap (Array Representation): 
-Debug Display. CurrentSize: 0
-Index 0: [1, ] 
-Index 1: [1, Task E] 
-Index 2: [2, Task C] 
-Index 3: [3, Task B] 
-Index 4: [6, Task A] 
-Index 5: [5, Task D] 
-Index 6: [0, ] 
-Index 7: [0, ] 
-Index 8: [0, ] 
-Index 9: [0, ] 
-Debug Display. CurrentSize: 11
-Index 0: [11, ] 
-Index 1: [1, 1] 
-Index 2: [2, 2] 
-Index 3: [3, 3] 
-Index 4: [4, 4] 
-Index 5: [5, 5] 
-Index 6: [6, 6] 
-Index 7: [7, 7] 
-Index 8: [8, 8] 
-Index 9: [9, 9] 
-Index 10: [10, 10] 
-Index 11: [11, 11] 
-Index 12: [0, ] 
-Index 13: [0, ] 
-Index 14: [0, ] 
-Index 15: [0, ] 
-Index 16: [0, ] 
-Index 17: [0, ] 
-Index 18: [0, ] 
-Index 19: [0, ] 
-Debug Display. CurrentSize: 10
-Index 0: [11, ] 
-Index 1: [2, 2] 
-Index 2: [4, 4] 
-Index 3: [3, 3] 
-Index 4: [8, 8] 
-Index 5: [5, 5] 
-Index 6: [6, 6] 
-Index 7: [7, 7] 
-Index 8: [11, 11] 
-Index 9: [9, 9] 
-Index 10: [10, 10] 
-Index 11: [11, ] 
-Index 12: [0, ] 
-Index 13: [0, ] 
-Index 14: [0, ] 
-Index 15: [0, ] 
-Index 16: [0, ] 
-Index 17: [0, ] 
-Index 18: [0, ] 
-Index 19: [0, ] 
-Debug Display. CurrentSize: 5
-Index 0: [3, ] 
-Index 1: [2, Task Thee] 
-Index 2: [3, Task Five] 
-Index 3: [5, Task One] 
-Index 4: [54, Task Four] 
-Index 5: [8, Task Two] 
-Index 6: [0, ] 
-Index 7: [0, ] 
-Index 8: [0, ] 
-Index 9: [0, ] 
-Inserting key-value pairs:
-
-Hash Table after insertions:
-(Bob,30) (Charlie,35) (David,40) (Alice,25) 
-Index 0: ACTIVE	Bob	30
-Index 1: ACTIVE	Charlie	35
-Index 2: EMPTY	-	-
+Index 0: ACTIVE	Task A	8
+Index 1: EMPTY	-	-
+Index 2: ACTIVE	Task E	1
 Index 3: EMPTY	-	-
-Index 4: ACTIVE	David	40
-Index 5: EMPTY	-	-
-Index 6: EMPTY	-	-
-Index 7: EMPTY	-	-
+Index 4: EMPTY	-	-
+Index 5: ACTIVE	Task B	2
+Index 6: ACTIVE	Task D	6
+Index 7: ACTIVE	Task C	3
 Index 8: EMPTY	-	-
 Index 9: EMPTY	-	-
-Index 10: ACTIVE	Alice	25
+Index 10: EMPTY	-	-
 
-Retrieving values:
-Alice: 25
-Bob: 30
-Charlie: 35
 
-Removing 'Bob' from the hash table.
+	HEAPTESTTIME
 
-Hash Table after removing 'Bob':
-(Charlie,35) (David,40) (Alice,25) 
-Index 0: DELETED	Bob	30
-Index 1: ACTIVE	Charlie	35
-Index 2: EMPTY	-	-
-Index 3: EMPTY	-	-
-Index 4: ACTIVE	David	40
-Index 5: EMPTY	-	-
-Index 6: EMPTY	-	-
-Index 7: EMPTY	-	-
-Index 8: EMPTY	-	-
-Index 9: EMPTY	-	-
-Index 10: ACTIVE	Alice	25
-
-Checking if 'Bob' is still in the table: Not found.
+Debug Display. CurrentSize: 5
+Index 0: [6, ] 
+Index 1: [1, Task D] 
+Index 2: [2, Task B] 
+Index 3: [3, Task C] 
+Index 4: [8, Task A] 
+Index 5: [6, Task E] 
+Index 6: [0, ] 
+Index 7: [0, ] 
+Index 8: [0, ] 
+Index 9: [0, ] 
+Debug Display. CurrentSize: 4
+Index 0: [6, ] 
+Index 1: [2, Task B] 
+Index 2: [6, Task E] 
+Index 3: [3, Task C] 
+Index 4: [8, Task A] 
+Index 5: [6, ] 
+Index 6: [0, ] 
+Index 7: [0, ] 
+Index 8: [0, ] 
+Index 9: [0, ] 
+Debug Display. CurrentSize: 3
+Index 0: [6, ] 
+Index 1: [3, Task C] 
+Index 2: [6, Task E] 
+Index 3: [8, Task A] 
+Index 4: [8, ] 
+Index 5: [6, ] 
+Index 6: [0, ] 
+Index 7: [0, ] 
+Index 8: [0, ] 
+Index 9: [0, ] 
