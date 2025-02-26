@@ -12,7 +12,7 @@ A data structure that enhances a heap with a map to support updatePriority() is 
 # The IndPQ Class
 
 Your main task is to implement an Indexed Priority Queue class, called IndPQ.   For this class, priorities will be non-negative integers with 0 being the highest priority, and the objects will be instances of the C++ string class std::string.  We will call the strings “task ID’s”.   The public functions are:  
-
+```c++
 IndPQ() —-> constructor creating an empty IndPQ.
 void insert( const std::string & taskid, int p ) --> Insert taskid with priority p.
 std::string & deleteMin()  --> Remove and return (a reference to) a task ID with smallest priority.
@@ -24,7 +24,7 @@ int size()  --> Return the number of tasks in the PQ.
 void clear( )  --> Remove all tasks from the PQ.
 void display( ) —-> prints out the queue contents.
 void ddisplay( ) —-> prints out a representation of the data structures.
-
+```
 IndPQ Implementation
 
 Your IndPQ class must be implemented by making use of two data structures.  The first is a heap (lets call it H) in which "nodes" contain a pair consisting of a priority (non-negative int) and a task ID (a string).   You must implement the heap class yourself, as described below.  The second is an instance (lets call it M) of an HMap class, like the one from Assignment 2.  unordered_map, which you use to map task IDs to integers which are heap node numbers (i.e., array indices). The idea is that, to implement the IndPQ function updatePriority(taskid,p), you use M to find which node of the heap holds taskid, and then call a heap function to update the priority of that task in the heap. 

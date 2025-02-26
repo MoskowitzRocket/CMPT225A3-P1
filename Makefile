@@ -2,7 +2,7 @@ GXX = g++
 CFLAGS = -std=c++20 -Wall -Wextra
 
 TARGET = TestIndPQ
-SRC = TestIndPQ.cpp
+SRC = TestIndPQ.cpp QuadraticProbing.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(TARGET)
