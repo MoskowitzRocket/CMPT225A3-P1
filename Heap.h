@@ -5,6 +5,8 @@
 template <typename Comparable>
 class Heap {
 
+
+
     public:
         explicit Heap( int capacity = 100);
         explicit Heap( const std::vector<Comparable> & items ) : array( items.size( ) + 10 ), currentSize{ items.size( ) } {
@@ -98,3 +100,4 @@ class Heap {
         }
 
 };
+
