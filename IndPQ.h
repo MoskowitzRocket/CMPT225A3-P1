@@ -5,139 +5,158 @@
 
 using namespace std;
 
-int nextPrime(int n );
+int nextPrime(int n);
 
-class IndPQ {
+class IndPQ
+{
 
-  public:
-
-
-    IndPQ(); //—-> constructor creating an empty IndPQ.
-    void insert( const std::string & taskid, int p );// --> Insert taskid with priority p.
-    std::string & deleteMin();//  --> Remove and return (a reference to) a task ID with smallest priority.
-    std::string & getMin(); //  --> Return (a reference to) a task ID with the smallest priority.
-    void updatePriority( const std::string & taskid, int p );//  --> change the priority for taskid to p.
-    void remove( const std::string & tid );// --> remove taskid from the PQ
-    bool isEmpty( );// --> Return true if the PQ is empty, otherwise false.
-    int size();//  --> Return the number of tasks in the PQ.
-    void clear( );//  --> Remove all tasks from the PQ.
-    void display( );// —-> prints out the queue contents.
-    void ddisplay( );// —-> prints out a representation of the data structures.
-  private:
-      
-    struct HeapNode {
+public:
+    IndPQ();                                               // —-> constructor creating an empty IndPQ.
+    void insert(const std::string &taskid, int p);         // --> Insert taskid with priority p.
+    std::string &deleteMin();                              //  --> Remove and return (a reference to) a task ID with smallest priority.
+    std::string &getMin();                                 //  --> Return (a reference to) a task ID with the smallest priority.
+    void updatePriority(const std::string &taskid, int p); //  --> change the priority for taskid to p.
+    void remove(const std::string &tid);                   // --> remove taskid from the PQ
+    bool isEmpty();                                        // --> Return true if the PQ is empty, otherwise false.
+    int size();                                            //  --> Return the number of tasks in the PQ.
+    void clear();                                          //  --> Remove all tasks from the PQ.
+    void display();                                        // —-> prints out the queue contents.
+    void ddisplay();                                       // —-> prints out a representation of the data structures.
+private:
+    struct HeapNode
+    {
         unsigned int priority;
         string taskid;
-        HeapNode() : priority(0), taskid("") {}  // Default constructor
-
-        HeapNode(unsigned int p, string & id) : priority(p), taskid(id) {};
-
+        HeapNode() : priority(0), taskid("") {} // Default constructor
+        HeapNode(unsigned int p, string &id) : priority(p), taskid(id) {}
     };
 
-    class Heap {
+    class Heap
+    {
 
-        
+    public:
+        // explicit Heap(int capacity = 100);
+        explicit Heap(const vector<HeapNode> &items) : array(items.size() + 10), currentSize{items.size()}
+        {
+            for (int i{0}; i < items.size(); ++i)
+            {
+                array[i + 1] = items[i];
+            }
+            buildHeap();
+        }
 
-        public:
-            //explicit Heap(int capacity = 100);
-            explicit Heap(const vector<HeapNode> & items) : array(items.size() + 10), currentSize{items.size()} {
-                for( int i{0}; i < items.size(); ++i) {
-                    array[ i + 1 ] = items[ i ];
-                }
-                buildHeap();
+        bool isEmpty() const
+        {
+            return currentSize == 0;
+        }
+
+        const HeapNode &findMin() const
+        {
+            return array[1];
+        }
+
+        void insert(const HeapNode &x)
+        {
+            if (currentSize == array.size())
+                array.resize(array.size() * 2);
+
+            // percolate up
+            int hole = ++currentSize;
+            HeapNode copy = x;
+
+            array[0] = std::move(copy);
+            for (; x.priority < array[hole / 2].priority; hole /= 2)
+            {
+                array[hole] = std::move(array[hole / 2]);
+            }
+            array[hole] = std::move(array[0]);
+        }
+
+        void deleteMin()
+        {
+            if (isEmpty())
+            {
+                cerr << "Cannot delete min -> heap is empty" << endl;
             }
 
-            bool isEmpty() const;
-            const HeapNode & findMin( ) const;
+            array[1] = std::move(array[currentSize--]);
+            percolateDown(1);
+        }
 
-            void insert( const HeapNode & x) {
-                if (currentSize == array.size())
-                    array.resize(array.size() * 2);
-
-                //percolate up
-                int hole = ++currentSize;
-                HeapNode copy = x;
-
-                array[ 0 ] = std::move( copy );
-                for( ; x.priority < array[hole / 2].priority; hole /= 2) {
-                    array[ hole ] = std::move( array[ hole / 2 ] );
-                }
-                array[ hole ] = std::move( array[ 0 ] );
+        void deleteMin(HeapNode &minItem)
+        {
+            if (isEmpty())
+            {
+                cerr << "Cannot delete min -> heap is empty" << endl;
             }
+            minItem = std::move(array[1]);
+            array[1] = std::move(array[currentSize--]);
+            percolateDown(1);
+        }
+        void makeEmpty()
+        {
+            currentSize = 0;
+        }
 
-            void deleteMin() {
-                if( isEmpty( ) )
+        void display() const
+        {
+            cout << "Heap (Array Representation): ";
+            for (int i = 1; i <= currentSize; ++i)
+            {
+                cout << "[" << array[i].priority << ", " << array[i].taskid << "] \n";
+            }
+            cout << endl;
+        }
+
+        void ddisplay() const
+        {
+            cout << "Debug Display. CurrentSize: " << currentSize << endl;
+
+            for (int i = 0; i < array.size(); i++)
+            {
+                cout << "Index " << i << ": [" << array[i].priority << ", " << array[i].taskid << "] \n";
+            }
+        }
+
+    private:
+        int currentSize; // number of elements in the heap
+        vector<HeapNode> array;
+
+        void buildHeap()
+        {
+            for (int i = currentSize / 2; i > 0; --i)
+            {
+                percolateDown(i);
+            }
+        }
+
+        void percolateDown(int hole)
+        {
+            int child;
+            HeapNode tmp = std::move(array[hole]);
+
+            for (; hole * 2 <= currentSize; hole = child)
+            {
+                child = hole * 2;
+                if (child != currentSize && array[child + 1].priority < array[child].priority)
                 {
-                    cerr << "Cannot delete min -> heap is empty" << endl;
+                    ++child;
                 }
-
-                array[ 1 ] = std::move( array[ currentSize-- ] );
-                percolateDown( 1 );
-            }
-
-            void deleteMin(HeapNode & minItem) {
-                if( isEmpty( ) )
+                if (array[hole].priority < tmp.priority)
                 {
-                    cerr << "Cannot delete min -> heap is empty" << endl;
+                    array[hole] = std::move(array[child]);
                 }
-                minItem = std::move( array[ 1 ] );
-                array[ 1 ] = std::move( array[ currentSize-- ] );
-                percolateDown( 1 );
-            }
-            void makeEmpty(){
-                currentSize = 0;
-            }
-
-            void display() const {
-                cout << "Heap (Array Representation): ";
-                for (int i = 1; i <= currentSize; ++i) {
-                    cout << "[" << array[i].priority << ", " << array[i].taskid << "] \n";
-                }
-                cout << endl;
-            }
-        
-            void ddisplay() const {
-                cout << "Debug Display. CurrentSize: " << currentSize << endl;
-                
-                for (int i = 0; i < array.size(); i++) {
-                    cout << "Index " << i << ": [" << array[i].priority << ", " << array[i].taskid << "] \n";
+                else
+                {
+                    break;
                 }
             }
 
-
-        private:
-            
-            int currentSize; //number of elements in the heap
-            vector<HeapNode> array;
-            
-            void buildHeap() {
-                for( int i = currentSize / 2; i > 0; --i) {
-                    percolateDown(i);
-                }
-            }
-
-            void percolateDown(int hole) {
-                int child;
-                HeapNode tmp = std::move( array[ hole ] );
-
-                for ( ; hole * 2 <= currentSize; hole = child){
-                    child = hole * 2;
-                    if( child!=currentSize && array[ child + 1 ].priority < array[ child ].priority) {
-                        ++child;
-                    }
-                    if( array[ hole ].priority < tmp.priority ) {
-                        array[ hole ] = std::move( array[ child ] );
-                    } else {
-                        break;
-                    }
-                }
-
-                array[ hole ] = std::move( tmp );
-            }
-
+            array[hole] = std::move(tmp);
+        }
     };
 
-    template <typename kt, typename vt>
+    //template<typename string, typename int>
     class HMap
     {
     public:
@@ -146,7 +165,7 @@ class IndPQ {
             makeEmpty();
         }
 
-        bool contains(const kt &x) const
+        bool contains(const string &x) const
         {
             return isActive(findPos(x));
         }
@@ -163,7 +182,7 @@ class IndPQ {
             return currentSize;
         }
 
-        bool insert(const kt &x, const vt &y)
+        bool insert(const string &x, const int &y)
         {
             // Insert x as active
             int currentPos = findPos(x);
@@ -184,7 +203,7 @@ class IndPQ {
             return true;
         }
 
-        bool insert(kt &&x)
+        bool insert(string &&x)
         {
             // Insert x as active
             int currentPos = findPos(x);
@@ -204,7 +223,7 @@ class IndPQ {
             return true;
         }
 
-        bool remove(const kt &x)
+        bool remove(const string &x)
         {
             int currentPos = findPos(x);
             if (!isActive(currentPos))
@@ -214,7 +233,7 @@ class IndPQ {
             return true;
         }
 
-        const vt &getValue(const kt &x) const
+        const int &getValue(const string &x) const
         {
             int pos = findPos(x); // Find the index of the key in the hash table
             return array[pos].value;
@@ -237,32 +256,33 @@ class IndPQ {
             cout << endl;
         }
 
-        void ddisplay()
-        {
-            for (size_t i = 0; i < array.size(); ++i)
-            {
+        void ddisplay() {
+            for (size_t i = 0; i < array.size(); ++i) {
                 cout << "Index " << i << ": ";
-                if (array[i].info == EMPTY)
-                    cout << "EMPTY\t-";
-                else if (array[i].info == DELETED)
-                    cout << "DELETED\t-";
-                else
-                    cout << array[i].key << "\t" << array[i].value;
+                
+                if (array[i].info == EMPTY) 
+                    cout << "EMPTY\t-\t-";
+                else if (array[i].info == DELETED) 
+                    cout << "DELETED\t" << array[i].key << "\t" << array[i].value;
+                else 
+                    cout << "ACTIVE\t" << array[i].key << "\t" << array[i].value;
+        
                 cout << endl;
             }
         }
+        
 
     private:
         struct HashEntry
         {
-            kt key;
-            vt value;
+            string key;
+            int value;
             EntryType info;
 
-            HashEntry(const kt &e = kt{}, EntryType i = EMPTY)
+            HashEntry(const string &e = string{}, EntryType i = EMPTY)
                 : key{e}, info{i} {}
 
-            HashEntry(kt &&e, EntryType i = EMPTY)
+            HashEntry(string &&e, EntryType i = EMPTY)
                 : key{std::move(e)}, info{i} {}
         };
 
@@ -274,7 +294,7 @@ class IndPQ {
             return array[currentPos].info == ACTIVE;
         }
 
-        int findPos(const kt &x) const
+        int findPos(const string &x) const
         {
             int offset = 1;
             int currentPos = myhash(x);
@@ -307,13 +327,13 @@ class IndPQ {
                     insert(std::move(entry.key));
         }
 
-        size_t myhash(const kt &x) const
+        size_t myhash(const string &x) const
         {
-            static hash<kt> hf;
+            static hash<string> hf;
             return hf(x) % array.size();
         }
     };
 
-    HMap<std::string, int> hmap;
-
+    Heap heap;
+    HMap hmap;
 };

@@ -8,7 +8,12 @@ class Heap {
 
 
     public:
-        explicit Heap( int capacity = 100);
+        explicit Heap( int capacity = 100) : array(capacity), currentSize{0} {
+            for(int i =0; i < items.size(); ++i) {
+                array[i + 1] = items[i];
+            }
+            buildHeap();
+        }
         explicit Heap( const std::vector<Comparable> & items ) : array( items.size( ) + 10 ), currentSize{ items.size( ) } {
             for(int i =0; i < items.size(); ++i) {
                 array[i + 1] = items[i];

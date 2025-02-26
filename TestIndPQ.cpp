@@ -1,8 +1,9 @@
 #include "IndPQ.h"
 #include <iostream>
 #include "Heapv2.h"
+#include "HMap.h"
 
-int main (int argc, char *argv[]) {
+int main () {
   
   // std::cout << "TEST" << std::endl;
 
@@ -63,6 +64,52 @@ int main (int argc, char *argv[]) {
   h.deleteMin();
 
   h.ddisplay();
+
+  Heap h1;
+
+  h1.insert({5,"Task One"});
+  h1.insert({8,"Task Two"});
+  h1.insert({2,"Task Thee"});
+  h1.insert({54,"Task Four"});
+  h1.insert({3,"Task Five"});
+  h1.ddisplay();
+
+  HMap hashTable(11);
+
+  // Insert key-value pairs
+  cout << "Inserting key-value pairs:\n";
+  hashTable.insert("Alice", 25);
+  hashTable.insert("Bob", 30);
+  hashTable.insert("Charlie", 35);
+  hashTable.insert("David", 40);
+
+  // Display the table
+  cout << "\nHash Table after insertions:" << endl;
+  hashTable.display();
+  hashTable.ddisplay();
+
+  // Test retrieval
+  cout << "\nRetrieving values:" << endl;
+  cout << "Alice: " << hashTable.getValue("Alice") << endl;
+  cout << "Bob: " << hashTable.getValue("Bob") << endl;
+  cout << "Charlie: " << hashTable.getValue("Charlie") << endl;
+
+  // Test deletion
+  cout << "\nRemoving 'Bob' from the hash table." << endl;
+  hashTable.remove("Bob");
+  
+  // Display the table after deletion
+  cout << "\nHash Table after removing 'Bob':" << endl;
+  hashTable.display();
+  hashTable.ddisplay();
+
+  // Check if removed key is still accessible
+  cout << "\nChecking if 'Bob' is still in the table: ";
+  if (hashTable.contains("Bob")) {
+      cout << "Found with value: " << hashTable.getValue("Bob") << endl;
+  } else {
+      cout << "Not found." << endl;
+  }
 
   
 
