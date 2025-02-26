@@ -1,6 +1,42 @@
+
+# Ignore build artifacts
 *.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
 *.exe
 *.out
+*.dSYM/
 
+# Ignore build directories
+/build/
+/bin/
+/Debug/
+/Release/
+/x64/
+/x86/
 
-.cache/
+# Ignore IDE and editor files
+*.swp
+*.swo
+.vscode/
+.idea/
+*.code-workspace
+CMakeLists.txt.user
+
+# Ignore dependency and package manager files
+/node_modules/
+/vendor/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# Ignore generated files
+Makefile
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
