@@ -23,6 +23,8 @@ class IndPQ {
     void display( );// —-> prints out the queue contents.
     void ddisplay( );// —-> prints out a representation of the data structures.
   private:
+      
+
 
     class Heap {
 
@@ -205,5 +207,6 @@ class IndPQ {
         }
     };
 
+    HMap<std::string, int> hmap;
 
 };
