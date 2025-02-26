@@ -46,10 +46,14 @@ Index 7: ACTIVE	Task C	3
 Index 8: EMPTY	-	-
 Index 9: EMPTY	-	-
 Index 10: EMPTY	-	-
+
+
+DELETINGMIN
+
 Debug Display. CurrentSize: 4
 Index 0: [1, ] 
-Index 1: [6, Task D] 
-Index 2: [2, Task B] 
+Index 1: [2, Task B] 
+Index 2: [6, Task D] 
 Index 3: [3, Task C] 
 Index 4: [8, Task A] 
 Index 5: [6, ] 
@@ -59,7 +63,7 @@ Index 8: [0, ]
 Index 9: [0, ] 
 Index 0: ACTIVE	Task A	8
 Index 1: EMPTY	-	-
-Index 2: ACTIVE	Task E	1
+Index 2: DELETED	Task E	1
 Index 3: EMPTY	-	-
 Index 4: EMPTY	-	-
 Index 5: ACTIVE	Task B	2

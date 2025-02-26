@@ -63,16 +63,16 @@ class Heap {
             percolateDown( 1 );
         }
 
-        void deleteMin(HeapNode & minItem) {
-            if( isEmpty( ) )
-            {
-                cerr << "Cannot delete min -> heap is empty" << endl;
-                return;
-            }
-            minItem = std::move( array[ 1 ] );
-            array[ 1 ] = std::move( array[ currentSize-- ] );
-            percolateDown( 1 );
-        }
+        // void deleteMin(HeapNode & minItem) {
+        //     if( isEmpty( ) )
+        //     {
+        //         cerr << "Cannot delete min -> heap is empty" << endl;
+        //         return;
+        //     }
+        //     minItem = std::move( array[ 1 ] );
+        //     array[ 1 ] = std::move( array[ currentSize-- ] );
+        //     percolateDown( 1 );
+        // }
         void makeEmpty(){
             currentSize = 0;
         }

@@ -128,8 +128,10 @@ int main () {
 
   ipq.ddisplay();
 
-
+  cout << "\n\nDELETINGMIN\n\n";
   ipq.deleteMin();
+
+  //ipq.insert("Task F", 1);
 
   ipq.ddisplay();
 
