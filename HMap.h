@@ -52,25 +52,25 @@ class HMap
             return true;
         }
 
-        bool insert(string &&x)
-        {
-            // Insert x as active
-            int currentPos = findPos(x);
-            if (isActive(currentPos))
-                return false;
+        // bool insert(string &&x)
+        // {
+        //     // Insert x as active
+        //     int currentPos = findPos(x);
+        //     if (isActive(currentPos))
+        //         return false;
 
-            if (array[currentPos].info != DELETED)
-                ++currentSize;
+        //     if (array[currentPos].info != DELETED)
+        //         ++currentSize;
 
-            array[currentPos] = std::move(x);
-            array[currentPos].info = ACTIVE;
+        //     array[currentPos] = std::move(x);
+        //     array[currentPos].info = ACTIVE;
 
-            // Rehash; see Section 5.5
-            if (currentSize > array.size() / 2)
-                rehash();
+        //     // Rehash; see Section 5.5
+        //     if (currentSize > array.size() / 2)
+        //         rehash();
 
-            return true;
-        }
+        //     return true;
+        // }
 
         bool remove(const string &x)
         {
@@ -171,9 +171,11 @@ class HMap
 
             // Copy table over
             currentSize = 0;
-            for (auto &entry : oldArray)
-                if (entry.info == ACTIVE)
-                    insert(std::move(entry.key));
+            for (auto &entry : oldArray){
+                if(entry.info == ACTIVE) {
+                    insert(std::move(entry.key),std::move(entry.value));
+                }
+            }
         }
 
         size_t myhash(const string &x) const

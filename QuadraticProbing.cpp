@@ -1,4 +1,5 @@
 #include "IndPQ.h"
+#include "IndPQv2.h"
 #include <iostream>
 using namespace std;
 

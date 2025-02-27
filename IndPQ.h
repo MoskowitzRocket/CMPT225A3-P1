@@ -12,28 +12,17 @@ class IndPQ
 
 public:
     // —-> constructor creating an empty IndPQ.
-    IndPQ() : heap(), hmap() {}
+    IndPQ() : heap(), hmap(), currentSize(0) {}
 
     // --> Insert taskid with priority p. 
     void insert(const std::string &taskid, int p)
     {
-        HeapNode newNode(p,taskid);
-        heap.insert(newNode);
-
-        hmap.insert(taskid, p);
+        
     }
 
     //  --> Remove and return (a reference to) a task ID with smallest priority.
     std::string &deleteMin(){
-        HeapNode minNode = heap.findMin();  // Get min node
-        heap.deleteMin();                   // Remove from heap
-        hmap.remove(minNode.taskid);         // Remove from hash map
-    
-        minTaskBuffer = minNode.taskid;      // Store in a class member
-
         
-
-        return minTaskBuffer;  
 
     }
 
@@ -47,25 +36,32 @@ public:
 
     //  --> change the priority for taskid to p.
     void updatePriority(const std::string &taskid, int p) {
-        int index = hmap.getValue(taskid);
-        
-        
+       
     }
 
     // --> remove taskid from the PQ
-    void remove(const std::string &tid);
+    void remove(const std::string &tid) {
+
+    }
 
     // --> Return true if the PQ is empty, otherwise false.
-    bool isEmpty();
+    bool isEmpty() {
+        return heap.isEmpty();
+    }
 
     //  --> Return the number of tasks in the PQ.
     int size();
 
     //  --> Remove all tasks from the PQ.
-    void clear();
+    void clear() {
+        currentSize = 0;
+    }
 
     // —-> prints out the queue contents.
-    void display();
+    void display() {
+        heap.display();
+        hmap.display();
+    }
 
     // —-> prints out a representation of the data structures.
     void ddisplay()
@@ -77,6 +73,8 @@ public:
 private:
 
     std::string minTaskBuffer;
+
+    int currentSize;
 
     struct HeapNode
     {
@@ -91,7 +89,7 @@ private:
         
 
         public:
-            explicit Heap( int capacity = 10) : array(capacity), currentSize{0} {
+            explicit Heap( int capacity = 11) : array(capacity), currentSize{0} {
                 
                 buildHeap();
             }
@@ -124,6 +122,27 @@ private:
                 }
                 array[ hole ] = std::move( array[ 0 ] );
             }
+
+            void updatePriority(int index, int p) {
+                array[index].priority = p;
+
+                if (index > 1 && array[index].priority < array[index / 2].priority) {
+                    percolateUp(index);
+                } else {
+                    percolateDown(index);
+                }
+
+            }
+
+            int getUpdatedIndex(const std::string &taskid) {
+                for (int i = 1; i <= currentSize; i++) {
+                    if (array[i].taskid == taskid) {
+                        return i;
+                    }
+                }
+                return -1; // Should never happen if taskid exists
+            }
+            
     
             void deleteMin() {
                 if( isEmpty( ) )
@@ -165,6 +184,8 @@ private:
                     cout << "Index " << i << ": [" << array[i].priority << ", " << array[i].taskid << "] \n";
                 }
             }
+
+            
     
     
         private:
@@ -176,6 +197,15 @@ private:
                 for( int i = currentSize / 2; i > 0; --i) {
                     percolateDown(i);
                 }
+            }
+
+            void percolateUp(int hole) {
+                HeapNode tmp = std::move( array[ hole ] );
+
+                for ( ; hole > 1 && tmp.priority < array[hole / 2].priority; hole /=2) {
+                    array[hole] = std::move(array[hole / 2]);
+                }
+                array[hole] = std::move(tmp);
             }
     
             void percolateDown(int hole) {
@@ -199,7 +229,6 @@ private:
     
     };
 
-    // template<typename string, typename int>
     class HMap
     {
     public:
@@ -246,25 +275,25 @@ private:
             return true;
         }
 
-        bool insert(string &&x)
-        {
-            // Insert x as active
-            int currentPos = findPos(x);
-            if (isActive(currentPos))
-                return false;
+        // bool insert(string &&x)
+        // {
+        //     // Insert x as active
+        //     int currentPos = findPos(x);
+        //     if (isActive(currentPos))
+        //         return false;
 
-            if (array[currentPos].info != DELETED)
-                ++currentSize;
+        //     if (array[currentPos].info != DELETED)
+        //         ++currentSize;
 
-            array[currentPos] = std::move(x);
-            array[currentPos].info = ACTIVE;
+        //     array[currentPos] = std::move(x);
+        //     array[currentPos].info = ACTIVE;
 
-            // Rehash; see Section 5.5
-            if (currentSize > array.size() / 2)
-                rehash();
+        //     // Rehash; see Section 5.5
+        //     if (currentSize > array.size() / 2)
+        //         rehash();
 
-            return true;
-        }
+        //     return true;
+        // }
 
         bool remove(const string &x)
         {
@@ -366,9 +395,11 @@ private:
 
             // Copy table over
             currentSize = 0;
-            for (auto &entry : oldArray)
-                if (entry.info == ACTIVE)
-                    insert(std::move(entry.key));
+            for (auto &entry : oldArray){
+                if(entry.info == ACTIVE) {
+                    insert(std::move(entry.key),std::move(entry.value));
+                }
+            }
         }
 
         size_t myhash(const string &x) const
