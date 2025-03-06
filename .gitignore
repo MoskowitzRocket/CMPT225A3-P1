@@ -21,7 +21,7 @@
 # Ignore IDE and editor files
 *.swp
 *.swo
-.vscode/
+vscode/
 .idea/
 *.code-workspace
 CMakeLists.txt.user
