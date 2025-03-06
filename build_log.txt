@@ -1,0 +1,6 @@
+rm -f TestIndPQ.o QuadraticProbing.o TestIndPQ
+g++    -c -o TestIndPQ.o TestIndPQ.cpp
+g++    -c -o QuadraticProbing.o QuadraticProbing.cpp
+g++ -std=c++20 -Wall -Wextra -o TestIndPQ TestIndPQ.o QuadraticProbing.o
+collect2.exe: error: ld returned 116 exit status
+make: *** [Makefile:11: TestIndPQ] Error 1

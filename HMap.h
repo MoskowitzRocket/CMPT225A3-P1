@@ -88,6 +88,11 @@ class HMap
             return array[pos].value;
         }
 
+        void setValue(const string &x, int newVal) {
+            int pos = findPos(x);
+            array[pos].value = newVal;
+        }
+
         enum EntryType
         {
             ACTIVE,
