@@ -182,7 +182,7 @@ private:
             for (const auto& entry : array)
             {
                 if (entry.info == ACTIVE)
-                    cout << "(" << entry.key << "," << entry.value << ") ";
+                    cout << "(" << entry.key << ", Index: " << entry.value << ")\n";
             }
             cout << endl;
         }
@@ -336,7 +336,7 @@ private:
         }
 
         void display() const {
-            cout << "Heap (Array Representation): ";
+            cout << "Heap (Array Representation): \n";
             for (int i = 1; i <= currentSize; ++i) {
                 cout << "[" << array[i].priority << ", " << array[i].taskid << "] \n";
             }
@@ -353,6 +353,12 @@ private:
 
         void setPriority(int index, int p) {
 			array[index].priority = p;
+
+            if (index > 1 && array[index].priority < array[index / 2].priority) {
+                percolateUp(index);
+            }
+            else percolateDown(index);
+
         }
 
     private:
