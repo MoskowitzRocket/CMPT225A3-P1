@@ -1,49 +1,20 @@
 ./TestIndPQ
-Inserting Task A at index 1
-Inserting Task B at index 2
-Inserting Task C at index 3
-Inserting Task D at index 4
-Inserting Task E at index 5
-Inserting Task F at index 6
-Inserting Task G at index 7
-Heap (Array Representation): 
-[2, Task A] 
-[4, Task B] 
-[6, Task C] 
-[8, Task D] 
-[7, Task E] 
-[9, Task F] 
-[12, Task G] 
-
-(Task C, Index: 3)
-(Task D, Index: 4)
-(Task G, Index: 7)
-(Task F, Index: 6)
-(Task A, Index: 1)
-(Task B, Index: 2)
-(Task E, Index: 5)
-
-
-
-
- Deleting Min
-
-
-Debug Display. CurrentSize: 6
-Index 0: [12, ] 
-Index 1: [4, Task B] 
-Index 2: [7, Task E] 
-Index 3: [6, Task C] 
-Index 4: [8, Task D] 
-Index 5: [12, Task G] 
-Index 6: [9, Task F] 
-Index 7: [12, ] 
+Inserting Saffat at index 1
+Debug Display. CurrentSize: 1
+Index 0: [4, ] 
+Index 1: [4, Saffat] 
+Index 2: [0, ] 
+Index 3: [0, ] 
+Index 4: [0, ] 
+Index 5: [0, ] 
+Index 6: [0, ] 
+Index 7: [0, ] 
 Index 8: [0, ] 
 Index 9: [0, ] 
 Index 10: [0, ] 
-Index 0: ACTIVE	Task C	3
-Index 1: ACTIVE	Task D	4
-Index 2: ACTIVE	Task G	5
+Index 0: ACTIVE	Saffat	1
+Index 1: EMPTY	-	-
+Index 2: EMPTY	-	-
 Index 3: EMPTY	-	-
 Index 4: EMPTY	-	-
 Index 5: EMPTY	-	-
@@ -52,39 +23,23 @@ Index 7: EMPTY	-	-
 Index 8: EMPTY	-	-
 Index 9: EMPTY	-	-
 Index 10: EMPTY	-	-
-Index 11: EMPTY	-	-
-Index 12: EMPTY	-	-
-Index 13: EMPTY	-	-
-Index 14: EMPTY	-	-
-Index 15: EMPTY	-	-
-Index 16: ACTIVE	Task F	6
-Index 17: DELETED	Task A	1
-Index 18: EMPTY	-	-
-Index 19: ACTIVE	Task B	1
-Index 20: EMPTY	-	-
-Index 21: EMPTY	-	-
-Index 22: ACTIVE	Task E	2
-
-
-
- Updating Priority
-
-
-Debug Display. CurrentSize: 6
-Index 0: [12, ] 
-Index 1: [4, Task B] 
-Index 2: [7, Task E] 
-Index 3: [1, Task C] 
-Index 4: [8, Task D] 
-Index 5: [12, Task G] 
-Index 6: [9, Task F] 
-Index 7: [12, ] 
+Moving Saffat to index 2
+Inserting Bryce at index 1
+Debug Display. CurrentSize: 2
+Index 0: [3, ] 
+Index 1: [3, Bryce] 
+Index 2: [4, Saffat] 
+Index 3: [0, ] 
+Index 4: [0, ] 
+Index 5: [0, ] 
+Index 6: [0, ] 
+Index 7: [0, ] 
 Index 8: [0, ] 
 Index 9: [0, ] 
 Index 10: [0, ] 
-Index 0: ACTIVE	Task C	3
-Index 1: ACTIVE	Task D	4
-Index 2: ACTIVE	Task G	5
+Index 0: ACTIVE	Saffat	2
+Index 1: ACTIVE	Bryce	1
+Index 2: EMPTY	-	-
 Index 3: EMPTY	-	-
 Index 4: EMPTY	-	-
 Index 5: EMPTY	-	-
@@ -93,15 +48,26 @@ Index 7: EMPTY	-	-
 Index 8: EMPTY	-	-
 Index 9: EMPTY	-	-
 Index 10: EMPTY	-	-
-Index 11: EMPTY	-	-
-Index 12: EMPTY	-	-
-Index 13: EMPTY	-	-
-Index 14: EMPTY	-	-
-Index 15: EMPTY	-	-
-Index 16: ACTIVE	Task F	6
-Index 17: DELETED	Task A	1
-Index 18: EMPTY	-	-
-Index 19: ACTIVE	Task B	1
-Index 20: EMPTY	-	-
-Index 21: EMPTY	-	-
-Index 22: ACTIVE	Task E	2
+Debug Display. CurrentSize: 2
+Index 0: [3, ] 
+Index 1: [3, Bryce] 
+Index 2: [1, Saffat] 
+Index 3: [0, ] 
+Index 4: [0, ] 
+Index 5: [0, ] 
+Index 6: [0, ] 
+Index 7: [0, ] 
+Index 8: [0, ] 
+Index 9: [0, ] 
+Index 10: [0, ] 
+Index 0: ACTIVE	Saffat	2
+Index 1: ACTIVE	Bryce	1
+Index 2: EMPTY	-	-
+Index 3: EMPTY	-	-
+Index 4: EMPTY	-	-
+Index 5: EMPTY	-	-
+Index 6: EMPTY	-	-
+Index 7: EMPTY	-	-
+Index 8: EMPTY	-	-
+Index 9: EMPTY	-	-
+Index 10: EMPTY	-	-
