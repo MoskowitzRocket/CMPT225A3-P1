@@ -32,6 +32,7 @@ public:
         // minTaskBuffer = index;
         hmap.remove(index);
         heap.deleteMin();
+        currentSize--;
         return index;
     }
 
@@ -56,6 +57,10 @@ public:
     // --> remove taskid from the PQ
     void remove(const std::string &tid)
     {
+        currentSize--;
+        int index = hmap.getValue(tid);
+        heap.setPriority(index, -1);
+        deleteMin();
     }
 
     // --> Return true if the PQ is empty, otherwise false.
@@ -74,6 +79,8 @@ public:
     void clear()
     {
         currentSize = 0;
+        heap.clear();
+        hmap.makeEmpty();
     }
 
     // —-> prints out the queue contents.
@@ -345,6 +352,23 @@ private:
             currentSize = 0;
         }
 
+        void clear()
+        {
+            // Simply reset the current size
+            currentSize = 0;
+
+            // Optional: If you want to reset the values in the array
+            // (not strictly necessary since currentSize controls what's "in" the heap)
+            for (int i = 1; i <= array.size(); ++i)
+            {
+                // You might want to update your hashmap too
+                if (i < array.size())
+                {
+                    hmap.remove(array[i].taskid); // Assuming you have a remove function in HMap
+                }
+            }
+        }
+
         void display() const
         {
             cout << "Heap (Array Representation): \n";
@@ -392,6 +416,15 @@ private:
 
         void percolateUp(int hole)
         {
+            HeapNode tmp = std::move(array[hole]);
+
+            for (; hole > 1 && tmp.priority < array[hole / 2].priority; hole /= 2)
+            {
+                array[hole] = std::move(array[hole / 2]);
+                hmap.setValue(array[hole].taskid, hole);
+            }
+            array[hole] = std::move(tmp);
+            hmap.setValue(array[hole].taskid, hole);
         }
 
         void percolateDown(int hole)
