@@ -1,14 +1,1 @@
-[
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-c",
-      "-o",
-      "TestIndPQ.o",
-      "TestIndPQ.cpp"
-    ],
-    "directory": "/home/kale/Documents/CMPT225/CMPT225A3-P1",
-    "file": "/home/kale/Documents/CMPT225/CMPT225A3-P1/TestIndPQ.cpp",
-    "output": "/home/kale/Documents/CMPT225/CMPT225A3-P1/TestIndPQ.o"
-  }
-]
+[]
