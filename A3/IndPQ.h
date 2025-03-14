@@ -1,3 +1,9 @@
+/**
+ * Copyright 2025 Kale Moskowitz
+ * Written for CMPT 225 A3
+ * IndPQ.h
+ */
+
 #pragma once
 #include <stdexcept>
 #include <string>
@@ -6,13 +12,22 @@
 
 using namespace std;
 
+//Function declaration for finding the next prime number
+//This function is used to find the next prime number when the hash table is resized
 int nextPrime(int n);
 
+
+/**
+ * Indexed Priority Queue Class
+ * 
+ */
 class IndPQ
 {
 
 public:
-    // —-> constructor creating an empty IndPQ.
+    /**
+     * Initialize hash map, heap, and set the current size to zero
+     */
     IndPQ() : hmap(), heap(hmap), currentSize(0) {}
 
     // --> Insert taskid with priority p.
@@ -50,8 +65,6 @@ public:
     {
         int index = hmap.getValue(taskid);
         heap.setPriority(index, p);
-
-        // hmap.setValue(taskid, index);
     }
 
     // --> remove taskid from the PQ
@@ -98,10 +111,13 @@ public:
     }
 
 private:
+    // Buffer to store the result of getMin() for returning by reference
     std::string minTaskBuffer;
 
+    // Buffer to store the result of getMin() for returning by reference
     int currentSize;
 
+    // Structure to store a task's priority and ID
     struct HeapNode
     {
         int priority;
@@ -110,19 +126,27 @@ private:
         HeapNode(int p, string id) : priority(p), taskid(id) {}
     };
 
+    // Hash Map and Heap classes
+
+    /**
+    * Uses the hash table to store the task IDs and their positions in the heap array
+    */
     class HMap
     {
     public:
+        // Constructor
         explicit HMap(int size = 11) : array(nextPrime(size))
         {
             makeEmpty();
         }
 
+        // Check if the key is in the hash table
         bool contains(const string &x) const
         {
             return isActive(findPos(x));
         }
 
+        // Make the hash table empty
         void makeEmpty()
         {
             currentSize = 0;
@@ -130,11 +154,13 @@ private:
                 entry.info = EMPTY;
         }
 
+        // Get the size of the hash table
         int getSize() const
         {
             return currentSize;
         }
 
+        // Insert a key into the hash table
         bool insert(const string &x, const int &y)
         {
             // Insert x as active
@@ -156,6 +182,7 @@ private:
             return true;
         }
 
+        // Remove a key from the hash table
         bool remove(const string &x)
         {
             int currentPos = findPos(x);
@@ -166,18 +193,21 @@ private:
             return true;
         }
 
+        // Get the value of a key in the hash table
         const int &getValue(const string &x) const
         {
             int pos = findPos(x); // Find the index of the key in the hash table
             return array[pos].value;
         }
 
+        // Set the value of a key in the hash table
         void setValue(const string &x, const int &y)
         {
             int pos = findPos(x); // Find the index of the key in the hash table
             array[pos].value = y;
         }
 
+        // Entry states for hash table slots
         enum EntryType
         {
             ACTIVE,
@@ -185,6 +215,7 @@ private:
             DELETED
         };
 
+        // Display the hash table
         void display()
         {
             cout << "(Taskid, Index in Heap Array)\n";
@@ -196,6 +227,7 @@ private:
             cout << endl;
         }
 
+        // Debug display of the hash table
         void ddisplay()
         {
             for (size_t i = 0; i < array.size(); ++i)
@@ -214,6 +246,12 @@ private:
         }
 
     private:
+
+        /**
+         * Structure for a hash table entry
+         * 
+         * Stores a key, value, and the state of the entry
+         */
         struct HashEntry
         {
             string key;
@@ -231,14 +269,19 @@ private:
             }
         };
 
+        // Hash table array
         vector<HashEntry> array;
+        
+        // Number of elements in the hash table
         int currentSize;
 
+        // Check if a slot in the hash table is active
         bool isActive(int currentPos) const
         {
             return array[currentPos].info == ACTIVE;
         }
 
+        // Find the position of a key in the hash table
         int findPos(const string &x) const
         {
             int offset = 1;
@@ -256,6 +299,7 @@ private:
             return currentPos;
         }
 
+        // Rehash the hash table
         void rehash()
         {
             vector<HashEntry> oldArray = array;
@@ -276,6 +320,7 @@ private:
             }
         }
 
+        // Hash function
         size_t myhash(const string &x) const
         {
             static hash<string> hf;
@@ -283,15 +328,24 @@ private:
         }
     };
 
+    /**
+     * Heap class
+     * 
+     * Implements a binary heap
+     */
     class Heap
     {
 
     public:
+        
+        // Constructor
         explicit Heap(HMap &hmapref, int capacity = 11) : hmap(hmapref), array(capacity), currentSize{0}
         {
 
             buildHeap();
         }
+
+        // Constructor with a vector of HeapNodes
         explicit Heap(HMap &hmapref, const vector<HeapNode> &items) : hmap(hmapref), array(static_cast<int>(items.size()) + 10), currentSize{static_cast<int>(items.size())}
         {
             for (int i{0}; i < items.size(); ++i)
@@ -301,16 +355,19 @@ private:
             buildHeap();
         }
 
+        // Check if the heap is empty
         bool isEmpty() const
         {
             return currentSize == 0;
         }
 
+        // Find the minimum element in the heap
         const HeapNode &findMin() const
         {
             return array[1];
         }
 
+        // Insert a new element into the heap
         int insert(const HeapNode &x)
         {
             if (currentSize + 1 == array.size())
@@ -336,6 +393,7 @@ private:
             return hole;
         }
 
+        // Delete the minimum element from the heap
         void deleteMin()
         {
             if (isEmpty())
@@ -348,11 +406,8 @@ private:
             percolateDown(1);
         }
 
-        void makeEmpty()
-        {
-            currentSize = 0;
-        }
-
+       
+        // Clear the heap
         void clear()
         {
             // Simply reset the current size
@@ -370,6 +425,7 @@ private:
             }
         }
 
+        // Display the heap
         void display() const
         {
             cout << "Heap (Array Representation): \n";
@@ -381,6 +437,7 @@ private:
             cout << endl;
         }
 
+        // Debug display of the heap
         void ddisplay() const
         {
             cout << "Debug Display. CurrentSize: " << currentSize << endl;
@@ -391,6 +448,7 @@ private:
             }
         }
 
+        // Set the priority of an element in the heap
         void setPriority(int index, int p)
         {
             array[index].priority = p;
@@ -405,9 +463,14 @@ private:
 
     private:
         int currentSize; // number of elements in the heap
+        
+        // Array to store the heap
         vector<HeapNode> array;
+
+        // Reference to the hash map
         HMap &hmap;
 
+        // Build the heap
         void buildHeap()
         {
             for (int i = currentSize / 2; i > 0; --i)
@@ -416,6 +479,7 @@ private:
             }
         }
 
+        // Percolate up
         void percolateUp(int hole)
         {
             HeapNode tmp = std::move(array[hole]);
@@ -429,6 +493,7 @@ private:
             hmap.setValue(array[hole].taskid, hole);
         }
 
+        // Percolate down
         void percolateDown(int hole)
         {
             int child;
@@ -457,6 +522,7 @@ private:
         }
     };
 
+    // Heap and Hash Map instances
     Heap heap;
     HMap hmap;
 };

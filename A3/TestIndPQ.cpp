@@ -1,3 +1,9 @@
+/**
+ * Copyright 2025 Kale Moskowitz
+ * Written for CMPT 225 A3
+ * TestIndPQ.cpp
+ */
+
 #include <iostream>
 #include <string>
 #include "IndPQ.h" // Assuming your class is in this header file
